@@ -1,0 +1,8 @@
+---
+- name: Install Grafana on Ubuntu
+  package:
+    name: "{{ grafana_ubuntu_packages }}"
+    state: present
+  tags:
+    - grafana
+

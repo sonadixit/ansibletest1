@@ -1,0 +1,17 @@
+---
+- name: Detect OS distribution
+  delegate_to: localhost
+  set_fact:
+    os_distribution: "{{ ansible_distribution }}"
+
+- name: Include OS-specific tasks
+  include_tasks: "os_tasks/{{ os_distribution }}.yml"
+  when: os_distribution is defined
+
+- name: Copy Grafana configuration file
+  template:
+    src: "grafana.ini.j2"
+    dest: "{{ grafana_config_dir }}/grafana.ini"
+  notify: restart grafana
+  tags:
+    - grafana

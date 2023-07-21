@@ -1,0 +1,7 @@
+---
+- name: Install Grafana on Fedora
+  package:
+    name: "{{ grafana_fedora_packages }}"
+    state: present
+  tags:
+    - grafana
